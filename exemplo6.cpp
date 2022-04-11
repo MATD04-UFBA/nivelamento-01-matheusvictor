@@ -1,18 +1,23 @@
 #include <iostream>
-#include <cstdlib>      
-#include <ctime>       
+#include <cstdlib> 
+#include <iomanip>
+#include <math.h>       /* sqrt */
 
-#define MAX 20
+#include <ctime>  
+
+using namespace std;
+
+#define MAX 3
 
 // ***********************************************
 // ***********************************************
 
 int main(int argc, char** argv) {
 
-int V[MAX],
-    numElem;
+    int V[MAX],
+        numElem;
 
-    std::cout << "Executando o programa " << argv[0] << std::endl;
+    cout << "Executando o programa " << argv[0] << std::endl;
 
     if (argc > 1)
         numElem = atoi(argv[1]);
@@ -21,22 +26,68 @@ int V[MAX],
 
     srand ( time(NULL) );
 
-    std::cout << "Gerando valores aleatorios..." << std::endl;
+    cout << "Gerando valores aleatorios..." << endl;
 
     for (int i = 0; i < numElem; i++) 
         V[i] = rand() % 100;
                
-    std::cout << "Valores gerados!" << std::endl;
+    cout << "Valores gerados!" << endl;
+
+    int somaNumerosGerados = 0; 
 
     for (int i = 0; i < numElem; i++) {
-        std::cout << "V[ " << i << " ] = " << V[i] << std::endl;
-        }
+        cout << "V[ " << i << " ] = " << V[i] << endl;
+        // Somando todos números gerados:
+        somaNumerosGerados += V[i];        
+    }
 
     // Calcular a media
+    float media = (somaNumerosGerados / size(V)) * 1.0;
+    float mediaDecimal = (somaNumerosGerados / size(V)) * 1.0;
+    
+    cout << "Media (arredondada) dos numeros gerados: " << fixed << setprecision(2) << media << endl;
+    cout << "Media (com dupla precisao) dos numeros gerados: " << fixed << setprecision(2) << mediaDecimal << endl;
 
-    // Calcular o desvio padrao
+    // Calcular o desvio padrao    
+    int somatorio = 0;    
+    float desvioPadrao = 0.0;
+
+    for (int i = 0; i < numElem; i++) {
+        int distancia = V[i] - media;
+        int quadradoDistancia = distancia * distancia;
+    
+        // cout << distancia << endl;
+        // cout << quadradoDistancia << endl;
+    
+        somatorio += quadradoDistancia;       
+        desvioPadrao = sqrt(somatorio/size(V));
+        
+    }
+
+    // cout << "somatorio" << somatorio << endl;
+    cout << "Desvio padrao (DP) da populacao: " << desvioPadrao << endl;
 
     // calcular o maior e o menor valor do conjunto
+    int maior,
+        menor = 0;
+
+    for (int i = 0; i < numElem; i++) {
+
+        if(i == 0){
+            maior = menor = V[i];
+        } else{        
+            if(V[i] > maior){
+                maior = V[i];
+            }
+
+            if(V[i] < menor){
+                menor = V[i];
+            }
+        }                   
+    }
+
+    cout << "Maior valor do conjunto: " << maior << endl;
+    cout << "Menor valor do conjunto: " << menor << endl;
 
     // Inverter o conteudo do vetor
     
