@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
     int V[MAX],
         numElem;
 
-    cout << "Executando o programa " << argv[0] << std::endl;
+    cout << "Executando o programa" << argv[0] << endl;
 
     if (argc > 1)
         numElem = atoi(argv[1]);
@@ -26,20 +26,24 @@ int main(int argc, char** argv) {
 
     srand ( time(NULL) );
 
+    cout << "***********************************************" << endl;
     cout << "Gerando valores aleatorios..." << endl;
 
     for (int i = 0; i < numElem; i++) 
         V[i] = rand() % 100;
+
+    cout << "***********************************************" << endl;
                
     cout << "Valores gerados!" << endl;
 
     int somaNumerosGerados = 0; 
 
     for (int i = 0; i < numElem; i++) {
-        cout << "V[ " << i << " ] = " << V[i] << endl;
-        // Somando todos números gerados:
-        somaNumerosGerados += V[i];        
+        cout << "V[ " << i << " ] = " << V[i] << endl;        
+        somaNumerosGerados += V[i]; // Somando todos números gerados
     }
+
+    cout << "***********************************************" << endl;
 
     // Calcular a media
     float media = (somaNumerosGerados / size(V)) * 1.0;
@@ -47,6 +51,9 @@ int main(int argc, char** argv) {
     
     cout << "Media (arredondada) dos numeros gerados: " << fixed << setprecision(2) << media << endl;
     cout << "Media (com dupla precisao) dos numeros gerados: " << fixed << setprecision(2) << mediaDecimal << endl;
+
+    cout << "***********************************************" << endl;
+
 
     // Calcular o desvio padrao    
     int somatorio = 0;    
@@ -57,15 +64,15 @@ int main(int argc, char** argv) {
         int quadradoDistancia = distancia * distancia;
     
         // cout << distancia << endl;
-        // cout << quadradoDistancia << endl;
-    
+        // cout << quadradoDistancia << endl;    
         somatorio += quadradoDistancia;       
-        desvioPadrao = sqrt(somatorio/size(V));
-        
+        desvioPadrao = sqrt(somatorio/size(V));        
     }
 
     // cout << "somatorio" << somatorio << endl;
     cout << "Desvio padrao (DP) da populacao: " << desvioPadrao << endl;
+
+    cout << "***********************************************" << endl;
 
     // calcular o maior e o menor valor do conjunto
     int maior,
@@ -89,7 +96,18 @@ int main(int argc, char** argv) {
     cout << "Maior valor do conjunto: " << maior << endl;
     cout << "Menor valor do conjunto: " << menor << endl;
 
+    cout << "***********************************************" << endl;
+
     // Inverter o conteudo do vetor
+    int vetorInvertido[MAX];
+    
+    cout << "Imprimindo vetor invertido..." << endl;
+
+    for (int i = numElem -1; i >= 0; i--) {
+        cout << "V[ " << i << " ] = " << V[i] << endl;    
+    }
+
+    cout << "***********************************************" << endl;
     
     return 0;
 }
